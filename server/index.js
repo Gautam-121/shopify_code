@@ -24,12 +24,13 @@ import webhookRegistrar from "./webhooks/index.js";
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
+
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
 // MongoDB Connection
 const mongoUrl =
-  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/shopify-express-app";
+  process.env.MONGO_URL ||  "mongodb+srv://Monalisamishra:MDYlL3MKtGxQa59a@cluster0.7zrfpkj.mongodb.net/shopify-express-app";
 
 mongoose.connect(mongoUrl);
 

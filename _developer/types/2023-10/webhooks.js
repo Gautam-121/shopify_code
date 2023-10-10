@@ -1,4 +1,5 @@
 /**
+ * 
  * @typedef {Object} APP_PURCHASES_ONE_TIME_UPDATE_app_purchase_one_time
  * @property {string} admin_graphql_api_id
  * @property {string} name

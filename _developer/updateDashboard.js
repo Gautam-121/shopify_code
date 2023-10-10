@@ -1,5 +1,6 @@
 /*
 
+
   DEV ONLY --> `npm run update:url`
 
   LIMITATION:
@@ -8,6 +9,7 @@
   - May break with a future update to `@shopify/cli-kit`.
  */
 
+  
 import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
 import { AbortError } from "@shopify/cli-kit/node/error";
 import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
