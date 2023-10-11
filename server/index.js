@@ -4,6 +4,7 @@ import Express from "express";
 import mongoose from "mongoose";
 import { resolve } from "path";
 import shopify from "../utils/shopifyConfig.js";
+import cors from "cors"
 
 import sessionHandler from "../utils/sessionHandler.js";
 import csp from "./middleware/csp.js";
@@ -30,7 +31,7 @@ const isDev = process.env.NODE_ENV === "dev";
 
 // MongoDB Connection
 const mongoUrl =
-  process.env.MONGO_URL ||  "mongodb+srv://Monalisamishra:MDYlL3MKtGxQa59a@cluster0.7zrfpkj.mongodb.net/shopify-express-app";
+  process.env.MONGO_URL || "mongodb+srv://bhardwajpreeti684:1TSjswOKCq34iWxL@cluster0.cwtrept.mongodb.net/notify-app";
 
 mongoose.connect(mongoUrl);
 
@@ -72,6 +73,8 @@ const createServer = async (root = process.cwd()) => {
 
   app.use(Express.json());
 
+app.use(cors())
+
   app.post("/graphql", verifyRequest, async (req, res) => {
     try {
       const sessionId = await shopify.session.getCurrentId({
@@ -94,7 +97,7 @@ const createServer = async (root = process.cwd()) => {
   app.use(csp);
   app.use(isShopActive);
   // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps", verifyRequest, userRoutes); //Verify user route requests
+  app.use("/apps",verifyRequest, userRoutes); //Verify user route requests
   app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
 
   app.post("/gdpr/:topic", verifyHmac, async (req, res) => {

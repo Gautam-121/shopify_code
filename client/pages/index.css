@@ -1,0 +1,87 @@
+.App {
+    text-align: center;
+    font-family: sans-serif;
+    background-color: white;
+    width: 100%;
+    border: 1px solid darkgray;
+    border-radius: 05px;
+  }
+  .toTag {
+    position: relative;
+    top: 1.3rem;
+    font-family: "Franklin Gothic Light", "Arial Narrow", Arial, sans-serif;
+    font-size: large;
+  }
+  .titleTag {
+    position: relative;
+    font-family: "Franklin Gothic Light", "Arial Narrow", Arial, sans-serif;
+    font-size: large;
+  }
+  
+  .bodyTag {
+    position: relative;
+    bottom: 5.1rem;
+    font-family: "Franklin Gothic Light", "Arial Narrow", Arial, sans-serif;
+    font-size: large;
+    font-weight: 1px;
+  }
+  .titleField {
+    position: relative;
+    font-size: medium;
+    font-family: "Franklin Gothic Lighter", "Arial ", Arial, sans-serif;
+    font-weight: lighter;
+    left: 1rem;
+    bottom: 0.1rem;
+    border: none;
+    border-bottom: 1px solid darkgray;
+    width: 80%;
+    padding: 2px;
+  }
+  .titleField:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+  }
+  .titleField:hover {
+    outline: none;
+    border-bottom: 2px solid black;
+  }
+  .titleField::placeholder {
+    color: darkgray;
+  }
+  .bodyTextarea {
+    position: relative;
+    top: 2px;
+    left: 1rem;
+    border: none;
+    resize: none;
+    font-family: "Franklin Gothic Lighter", "Arial Narrow", Arial, sans-serif;
+    font-size: large;
+  }
+  .bodyTextarea:focus {
+    outline: 0;
+  }
+  #sendBtn {
+   
+    width: 5rem;
+    height: 2rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  .container {
+    padding-left: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+  }
+  .sectionDiv {
+    width: 40rem;
+    padding: 2px;
+    display: flex;
+  }
+#serviceKeyField{
+    border-radius: 10px;
+}

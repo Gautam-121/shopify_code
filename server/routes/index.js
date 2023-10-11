@@ -1,6 +1,7 @@
 import { Router } from "express";
 import clientProvider from "../../utils/clientProvider.js";
 import subscriptionRoute from "./recurringSubscriptions.js";
+import getAllSegment from  "../controllers/getAllSegment.js"
 
 const userRoutes = Router();
 userRoutes.use(subscriptionRoute);
@@ -59,5 +60,7 @@ userRoutes.get("/api/activeWebhooks", async (req, res) => {
   });
   return res.status(200).json(activeWebhooks);
 });
+
+userRoutes.get("/api/getAllSegment", getAllSegment)
 
 export default userRoutes;

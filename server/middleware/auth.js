@@ -36,9 +36,10 @@ const authMiddleware = (app) => {
         rawRequest: req,
         rawResponse: res,
       });
-
       const { session } = callbackResponse;
-
+      // console.log(session)
+      // process.env.shopify_token = session?.Session?.accessToken
+      // console.log(session?.session?.accessToken)
       await sessionHandler.storeSession(session);
 
       const webhookRegisterResponse = await shopify.webhooks.register({
@@ -80,7 +81,9 @@ const authMiddleware = (app) => {
 
       const { session } = callbackResponse;
       await sessionHandler.storeSession(session);
-
+      // console.log(session);
+      const { accessToken } = session || {}; // Use default empty object in case session is undefined
+      // console.log(accessToken);
       const host = req.query.host;
       const { shop } = session;
 
