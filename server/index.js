@@ -37,9 +37,10 @@ mongoose.connect(mongoUrl);
 
 // Register all webhook handlers
 webhookRegistrar();
+const app = Express();
+app.use(cors())
 
 const createServer = async (root = process.cwd()) => {
-  const app = Express();
   app.disable("x-powered-by");
 
   applyAuthMiddleware(app);
@@ -72,8 +73,6 @@ const createServer = async (root = process.cwd()) => {
   );
 
   app.use(Express.json());
-
-app.use(cors())
 
   app.post("/graphql", verifyRequest, async (req, res) => {
     try {
