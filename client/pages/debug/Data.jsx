@@ -1,25 +1,33 @@
-import { Layout, LegacyCard, Page } from "@shopify/polaris";
+import {
+  Layout,
+  LegacyCard,
+  Page,
+} from "@shopify/polaris";
 import { navigate } from "raviger";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
+import Notification from "../Notification";
 
+let segs = []
 const useDataFetcher = (initialState, url, options) => {
   const [data, setData] = useState(initialState);
-
+  const [segments, setSegments] = useState([])
   const fetch = useFetch();
-  
+ 
   const fetchData = async () => {
     setData("loading...");
     const result = await (await fetch(url, options)).json();
     setData(result.text);
-    console.log(result)
+    console.log(result.segments);
+    setSegments(result.segments)
+    let dataFromApi = result.segments
+    segs=dataFromApi.map((ele)=>ele.name)
   };
 
-  return [data, fetchData];
+  return [data, fetchData, segments];
 };
 
 const GetData = () => {
-
   const postOptions = {
     headers: {
       Accept: "application/json",
@@ -37,75 +45,40 @@ const GetData = () => {
     method: "GET",
   };
 
-  const [responseSegment , fetchSegment] = useDataFetcher(
-    "" , "/api/getSegment?shop=renergii.myshopify.com",
+  const [responseSegment, fetchSegment] = useDataFetcher(
+    "",
+    "/api/getSegment?shop=renergii.myshopify.com",
     getSegment
-  )
-  
-  useEffect(() => {
-    console.log({ responseSegment });
-  }, [responseSegment]);
-  const [responseData, fetchContent] = useDataFetcher("", "/api");
+  );
   const [responseDataPost, fetchContentPost] = useDataFetcher(
     "",
     "api",
     postOptions
   );
 
-  // const [responseDataGQL, fetchContentGQL] = useDataFetcher("", "api/gql");
-
-  // useEffect(() => {
-  //   console.log({ responseDataGQL });
-  // }, [responseDataGQL]);
 
   useEffect(() => {
-    // fetchContent();
     fetchContentPost();
-    // fetchContentGQL();
-    fetchSegment()
+    fetchSegment();
   }, []);
-
+  console.log("data 65",segs)
+ 
+ 
   return (
     <>
-      <Page
-        title="Data Fetching"
-      >
+      <Page>
         <Layout>
-          {/* <DataCard
-            method="GET"
-            url="/api/apps"
-            data={responseData}
-            onRefetch={fetchContent}
-          /> */}
-          {/* <DataCard
-            method="POST"
-            url="/api/apps"
-            data={responseDataPost}
-            onRefetch={fetchContentPost}
-          /> */}
-          {/* <DataCard
-            method="GET"
-            url="/api/apps/debug/gql"
-            data={responseDataGQL}
-            onRefetch={fetchContentGQL}
-          /> */}
-          <DataCard
-            method="GET"
-            url="/api/apps/getSegment"
-            data={responseSegment}
-          />
+          <Notification segments={segs} />
         </Layout>
       </Page>
     </>
   );
 };
 
-const DataCard = ({ method, url, data,  }) => (
+const DataCard = ({ method, url, data }) => (
   <>
     <Layout.Section>
-      <LegacyCard
-        sectioned
-      >
+      <LegacyCard sectioned>
         <p>
           {method} <code>{url}</code>: {data}
         </p>
