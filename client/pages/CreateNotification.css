@@ -1,0 +1,123 @@
+.container{
+
+    display: inline-flex;
+flex-direction: column;
+align-items: center;
+    width: 30rem;
+min-height:  30rem;
+border-radius: 10px;
+    box-sizing: border-box;
+}
+.head{
+    border: 1px solid #D1D1D1;
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #fff;
+}
+.body{
+height: 80%;
+width: 100%;
+border-radius: 0rem 0rem 10px 10px;
+border: 1px solid #D1D1D1;
+background: #FCFCFC;
+display: flex;
+flex-direction: column;
+gap: 2rem;
+justify-content: center;
+align-items: center;
+}
+.notifyPic{
+    width: 1.5rem;
+   margin-right: 10px;
+   position: relative;
+   top: 5px;
+}
+#subHeading{
+    
+    color: #808080;
+}
+#heading{
+    color: #343434;
+}
+.css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag{
+    background-color: #4D3F87;
+    color: blue;
+}
+#sendBtn{
+    background-color: #4D3F87;
+    text-transform: none;
+    width: 6rem;
+  
+}
+.titleSection{
+    border: 1px solid #CCC;
+    min-height: 3rem;
+    border-radius: 5px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 15px;
+    gap: 2px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+.titleSection >input{
+    border: none;
+    min-height: 1rem;
+    font-size: 16px;
+    font-family: Sora;
+}
+.titleSection >input:focus{
+    outline: none;
+    
+}
+textarea::-webkit-scrollbar {
+    width: 1em;
+}
+.titleSection>textarea{
+    font-family: Sora;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    resize: none;
+}
+.titleSection> label{
+color: #B1B1B1;
+}
+.toTag{
+    position: relative;
+    top: 23px;
+    left: 13px;
+    z-index: 10;
+    color: #B1B1B1;
+}
+
+.css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag {
+    background-color: #4D3F87;
+    color: white;
+    height: 1.7rem;
+    size: small;
+}
+.MuiAutocomplete-hasPopupIcon.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root, .MuiAutocomplete-hasClearIcon.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root {
+    background-color: white;
+    border: 1px solid #D1D1D1;
+}
+.css-38raov-MuiButtonBase-root-MuiChip-root .MuiChip-deleteIcon{
+    color:yellow
+}
+.bottomSection{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    padding-right: 3rem;
+    margin-bottom: 2rem;
+}
+.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root.MuiInputBase-sizeSmall{
+border-radius: 5px;
+}

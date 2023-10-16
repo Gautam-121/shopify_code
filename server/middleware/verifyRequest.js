@@ -18,7 +18,16 @@ const verifyRequest = async (req, res, next) => {
     });
 
     const session = await sessionHandler.loadSession(sessionId);
+    
+    if(session && session?.shop)
+    {
+      req.query.shop = session?.shop
+    }
+
     console.log(session, "hii from session");
+    console.log(session?.shop);
+    console.log(req.query.shop);
+
     // console.log(new Date(session?.expires) > new Date());
     if (new Date(session?.expires) > new Date()) {
       const client = new shopify.clients.Graphql({ session });

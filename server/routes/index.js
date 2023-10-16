@@ -1,12 +1,13 @@
 import { Router } from "express";
 import clientProvider from "../../utils/clientProvider.js";
 import subscriptionRoute from "./recurringSubscriptions.js";
-import getAllSegment from  "../controllers/getSegment.js"
-import axios from "axios";
+import getAllSegment from  "../controllers/getSegment.js";
+import sendNotification from "../controllers/sendNotification.js";
 import dotenv from "dotenv";
 dotenv.config();
 import Cryptr from "cryptr";
-import SessionModel from "../../utils/models/SessionModel.js";
+import serverKey from "../controllers/serverKey.js";
+
 
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
@@ -68,6 +69,10 @@ userRoutes.get("/api/activeWebhooks", async (req, res) => {
   return res.status(200).json(activeWebhooks);
 });
 
-userRoutes.get("/api/getSegment",getAllSegment)
+userRoutes.get("/api/getSegment", getAllSegment)
+
+userRoutes.post("/api/sendNotificatication", sendNotification)
+
+userRoutes.post("/api/updateServerKey",serverKey)
 
 export default userRoutes;

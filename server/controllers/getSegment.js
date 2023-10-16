@@ -9,7 +9,7 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 const getAllSegment = async (req, res) => {
   try {
     const shop = req.query.shop;
-    console.log(req)
+    console.log("console from segment",req.query.shop)
     const sessionDetail = await SessionModel.findOne({ shop: shop });
     if (sessionDetail === null) {
       return undefined;

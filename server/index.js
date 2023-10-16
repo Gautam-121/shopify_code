@@ -22,6 +22,7 @@ import verifyRequest from "./middleware/verifyRequest.js";
 import proxyRouter from "./routes/app_proxy/index.js";
 import userRoutes from "./routes/index.js";
 import webhookRegistrar from "./webhooks/index.js";
+// import { sequelize } from "./postgreSql.js";
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
@@ -34,6 +35,9 @@ const mongoUrl =
   process.env.MONGO_URL || "mongodb+srv://bhardwajpreeti684:1TSjswOKCq34iWxL@cluster0.cwtrept.mongodb.net/notify-app";
 
 mongoose.connect(mongoUrl);
+
+// await sequelize.sync({ force: true });
+// console.log("postgreSQL Database connected!");
 
 // Register all webhook handlers
 webhookRegistrar();
@@ -96,7 +100,7 @@ const createServer = async (root = process.cwd()) => {
   app.use(csp);
   app.use(isShopActive);
   // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps",verifyRequest, userRoutes); //Verify user route requests
+  app.use("/apps", verifyRequest , userRoutes); //Verify user route requests
   app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
 
   app.post("/gdpr/:topic", verifyHmac, async (req, res) => {

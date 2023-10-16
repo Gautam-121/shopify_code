@@ -1,17 +1,17 @@
 import React from "react";
 
 import ExitFrame from "./ExitFrame";
-import Index from "./pages/Index";
-import Landing from "./pages/Landing";
+
+import LandingPage from "./pages/LandingPage";
 import DebugIndex from "./pages/debug/Index";
 import BillingAPI from "./pages/debug/Billing";
 import GetData from "./pages/debug/Data";
 import ActiveWebhooks from "./pages/debug/Webhooks";
-import Notification from "./pages/Notification";
+import CreateNotification from './pages/CreateNotification'
 // import Segment from "./pages/Index"
 
 const routes = {
-  "/": () => <Landing/>,
+  "/": () => <GetData/>,
   "/exitframe": () => <ExitFrame />,
   "/exitframe/:shop": ({ shop }) => <ExitFrame shop={shop} />,
   //Debug Cards
@@ -19,7 +19,7 @@ const routes = {
   "/debug/webhooks": () => <ActiveWebhooks />,
   // "/debug/data": () => <GetData />,
   "/debug/billing": () => <BillingAPI />,
-  "/createnotification":()=><GetData/>
+  "/createnotification":()=><CreateNotification/>
   //Add your routes here
 };
 

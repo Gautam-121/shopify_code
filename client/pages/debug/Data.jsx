@@ -1,27 +1,26 @@
-import {
-  Layout,
-  LegacyCard,
-  Page,
-} from "@shopify/polaris";
+import { Layout, LegacyCard, Page } from "@shopify/polaris";
 import { navigate } from "raviger";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Notification from "../Notification";
+import LandingPage from "../LandingPage";
+import {useRecoilState} from 'recoil'
+import { segmentsAtom } from "../../recoilStore/store";
 
-let segs = []
+let segs = [];
 const useDataFetcher = (initialState, url, options) => {
   const [data, setData] = useState(initialState);
-  const [segments, setSegments] = useState([])
+  const [segments, setSegments] = useRecoilState(segmentsAtom);
   const fetch = useFetch();
- 
+
   const fetchData = async () => {
     setData("loading...");
     const result = await (await fetch(url, options)).json();
-    setData(result.text);
     console.log(result.segments);
-    setSegments(result.segments)
-    let dataFromApi = result.segments
-    segs=dataFromApi.map((ele)=>ele.name)
+    setData(result.segments);
+    let dataFromApi = result.segments;
+    segs = dataFromApi.map((ele) => ele.name);
+    setSegments(segs)
   };
 
   return [data, fetchData, segments];
@@ -47,7 +46,7 @@ const GetData = () => {
 
   const [responseSegment, fetchSegment] = useDataFetcher(
     "",
-    "/api/getSegment?shop=renergii.myshopify.com",
+    "/api/getSegment",
     getSegment
   );
   const [responseDataPost, fetchContentPost] = useDataFetcher(
@@ -56,20 +55,16 @@ const GetData = () => {
     postOptions
   );
 
-
   useEffect(() => {
     fetchContentPost();
     fetchSegment();
   }, []);
-  console.log("data 65",segs)
- 
- 
+  console.log("data 65", segs);
+
   return (
     <>
       <Page>
-        <Layout>
-          <Notification segments={segs} />
-        </Layout>
+        <LandingPage  />
       </Page>
     </>
   );
