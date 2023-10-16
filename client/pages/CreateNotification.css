@@ -121,3 +121,10 @@ color: #B1B1B1;
 .css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root.MuiInputBase-sizeSmall{
 border-radius: 5px;
 }
+#settingsBtn{
+    background-color: #4D3F87;
+    text-transform: none;
+    width: 4rem;
+    position: absolute;
+    left:92%;
+}

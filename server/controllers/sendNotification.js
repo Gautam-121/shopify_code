@@ -25,7 +25,7 @@ const sendNotification = async (req, res) => {
     console.log("from notif api" , accessToken)
 
   const shopifyGraphQLEndpoint = `https://${shop}/admin/api/2023-04/graphql.json`;
-
+console.log(req.body)
   const { title, body, segments: segmentSelected } = req.body.notificationMessage;
 
   // console.log("request body is" + req.body?.notificationMessage?.segmentSelected )
@@ -58,13 +58,11 @@ const sendNotification = async (req, res) => {
   };
 
   let topics_combined = "";
+  for (let index = 0; index < segmentSelected.length; index++) {
+    const topicName = segmentSelected[index].replace(/\W+/g, '_'); // Replace non-alphanumeric characters with underscores
+    topics_combined += `('${topicName}' in topics)`;
 
-
-  // let topics_combined = segmentSelected.map((segment) => `'${segment}' in topics`).join(" || ");
-  for (const index in segmentSelected) {
-    topics_combined += `('${segmentSelected[index]}' in topics) `;
-
-    if (index < segmentSelected.length - 1) topics_combined += "|| ";
+    if (index < segmentSelected.length - 1) topics_combined += " || ";
 
     //   const customer_in_Segment = `{
     //   customers(query: "${segmentSelected[index]._id}") {
@@ -86,11 +84,11 @@ const sendNotification = async (req, res) => {
     //   const customerRegistrationToken = customers.map(customer => customerRegistrationToken.push(customer?.metafields?.Firebase_Token))
 
     // Subscribe to the topic
-    console.log(segmentSelected[index])
+    console.log(topics_combined)
     await axios.post(
       "https://iid.googleapis.com/iid/v1:batchAdd",
       {
-        to: `/topics/${segmentSelected[index]}`,
+        to: `/topics/${topicName}`,
         registration_tokens: [
           "dLPRXoI3nkyeq8s0LiEGjA:APA91bFvWdu3yBpKMRAr1BDacTvF9P9Bk6zjHVqvLLhyOi_KkFmwAyeEkus4w20dkXdY68bEPric-37etPPOBniQeX4UOSCiWRlQE-MZfEPmCWmn4nh8TCg00tbtS6ovflbmg_UW4HJT",
         ],

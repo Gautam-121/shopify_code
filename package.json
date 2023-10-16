@@ -35,6 +35,7 @@
     "@apollo/client": "^3.8.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.13",
     "@mui/material": "^5.14.13",
     "@shopify/app-bridge": "^3.7.9",
     "@shopify/app-bridge-react": "^3.7.9",

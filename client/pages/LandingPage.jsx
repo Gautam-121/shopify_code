@@ -3,9 +3,9 @@ import { Card, Page, Text, Form} from "@shopify/polaris";
 import React, { useState } from "react";
 import styles from "./LandingPage.module.css";
 import { useNavigate } from "raviger";
-// import '../public/userImg.png'
+import '../public/userImg.png'
 import {useRecoilState} from 'recoil'
-import { segmentsAtom } from "../recoilStore/store";
+import { segmentsAtom, serverKeyAtom } from "../recoilStore/store";
 import axios from "axios";
 import useFetch from "../hooks/useFetch";
 
@@ -13,7 +13,7 @@ export default function LandingPage() {
   // console.log("segments in props", segments)
   // const [segment, setSegment] = useRecoilState(segmentsAtom)
     const navigate = useNavigate()
-  const [serverKey, setServerKey] = useState("");
+  const [serverKey, setServerKey] = useRecoilState(serverKeyAtom);
   const [isServerKeyValid, setIsServerKeyValid] = useState(false);
   const handleInput = (event) => {
     const input = event.target.value;
@@ -77,11 +77,11 @@ export default function LandingPage() {
       <Page>
         <div className={styles.container}>
           <div className={styles.topHalf}>
-            {/* <img
-              src="../public/userImg.png"
+            <img
+              src="/userImg.png"
               alt="userIcon"
               className={styles.userImg}
-            /> */}
+            />
             <Text id={styles.greeting} as="h1" variant="headingMd">
               Hi, Welcome!
             </Text>
