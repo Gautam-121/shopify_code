@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import Cryptr from "cryptr";
 import serverKey from "../controllers/serverKey.js";
+import getServerKey from "../controllers/getServerKey.js";
 
 
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
@@ -72,6 +73,8 @@ userRoutes.get("/api/activeWebhooks", async (req, res) => {
 userRoutes.get("/api/getSegment", getAllSegment)
 
 userRoutes.post("/api/sendNotificatication", sendNotification)
+
+userRoutes.get("/api/getServerkey",getServerKey)
 
 userRoutes.post("/api/updateServerKey",serverKey)
 

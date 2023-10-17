@@ -37,3 +37,6 @@
 .errorMessage{
     color: red;
 }
+#toastMarkup{
+    background-color: green;
+}

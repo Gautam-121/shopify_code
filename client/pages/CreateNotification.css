@@ -27,9 +27,10 @@ border: 1px solid #D1D1D1;
 background: #FCFCFC;
 display: flex;
 flex-direction: column;
-gap: 2rem;
+gap: 1.5rem;
 justify-content: center;
 align-items: center;
+padding-top: 10px;
 }
 .notifyPic{
     width: 1.5rem;
@@ -58,7 +59,7 @@ align-items: center;
     border: 1px solid #CCC;
     min-height: 3rem;
     border-radius: 5px;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -99,8 +100,8 @@ color: #B1B1B1;
 }
 
 .css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag {
-    background-color: #4D3F87;
-    color: white;
+    background-color: #D4D1E2;
+    color:#1A1A1A;
     height: 1.7rem;
     size: small;
 }
@@ -127,4 +128,39 @@ border-radius: 5px;
     width: 4rem;
     position: absolute;
     left:92%;
+}
+.alert{
+    border: 1px solid #D9BABA;;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #F5D2D2;
+    margin-top: 10px;
+}
+
+strong{
+    display: flex;
+    gap: 3px;
+}
+#alertTitle{
+   display: flex;
+   justify-content: space-between;
+}
+/* #segmentsField{
+    background-color: white;
+    border-radius: 5px;
+} */
+.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root.MuiInputBase-sizeSmall .MuiFilledInput-input::placeholder{
+    font-family: Sora;
+    opacity: 0.8;
+}
+.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root.MuiInputBase-sizeSmall .MuiFilledInput-input{
+    font-size: medium;
+    margin-bottom: 8px;
+}
+.css-1h51icj-MuiAutocomplete-root .MuiFilledInput-root.MuiInputBase-sizeSmall:hover {
+   outline: none;
+}
+.css-wb57ya-MuiFormControl-root-MuiTextField-root{
+    background-color: green;
 }

@@ -14,11 +14,9 @@ try{
       })
     }
   
-    const storeData = await SessionModel.updateMany(
-      { shop: shop },
-      {
-        serverKey : serverKey
-      },
+    const storeData = await SessionModel.update(
+      { serverKey: serverKey },
+      { where: { shop: shop } }
     );
 
     console.log(storeData)

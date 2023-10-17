@@ -22,7 +22,7 @@ import verifyRequest from "./middleware/verifyRequest.js";
 import proxyRouter from "./routes/app_proxy/index.js";
 import userRoutes from "./routes/index.js";
 import webhookRegistrar from "./webhooks/index.js";
-// import { sequelize } from "./postgreSql.js";
+import { sequelize } from "./postgreSql.js";
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
@@ -30,14 +30,8 @@ setupCheck(); // Run a check to ensure everything is setup properly
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
 
-// MongoDB Connection
-const mongoUrl =
-  process.env.MONGO_URL || "mongodb+srv://bhardwajpreeti684:1TSjswOKCq34iWxL@cluster0.cwtrept.mongodb.net/notify-app";
-
-mongoose.connect(mongoUrl);
-
-// await sequelize.sync({ force: true });
-// console.log("postgreSQL Database connected!");
+await sequelize.sync({ force: true });
+console.log("postgreSQL Database connected!");
 
 // Register all webhook handlers
 webhookRegistrar();

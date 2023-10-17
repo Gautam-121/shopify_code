@@ -11,7 +11,7 @@ const sendNotification = async (req, res) => {
     try{
     const shop = req.query.shop;
     console.log(req)
-    const sessionDetail = await SessionModel.findOne({ shop: shop });
+    const sessionDetail = await SessionModel.findOne({ where: { shop: shop } });
 
     if (sessionDetail === null) {
       return undefined;
@@ -123,7 +123,7 @@ console.log(req.body)
 }catch (error) {
     console.error("Error:", error);
     // Handle the error and send an appropriate response
-    return res.status(500).json({ success: false, error: "Internal Server Error" });
+    return res.status(500).json({ success: false, error: error });
   };
 }
 

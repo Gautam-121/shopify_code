@@ -9,20 +9,3 @@ export const sequelize =new Sequelize ({
     database: process.env.PGDATABASE,
 });
 
-
-// export const connectSql =async () => {
-//   const sequelize = new Sequelize("notify", "postgres", "987654", {
-//     host: "localhost",
-//     dialect: "postgres",
-//   });
-
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//     // User=userModel(sequelize);
-//     // await sequelize.sync();
-//     console.log('table created successfully')
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-// };

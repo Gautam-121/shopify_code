@@ -1,18 +1,15 @@
 import { Button } from "@mui/material";
-import { Card, Page, Text, Form} from "@shopify/polaris";
-import React, { useState } from "react";
+import { Card, Page, Text, Form } from "@shopify/polaris";
+import React, { useEffect, useState } from "react";
 import styles from "./LandingPage.module.css";
 import { useNavigate } from "raviger";
-import '../public/userImg.png'
-import {useRecoilState} from 'recoil'
+import "../public/userImg.png";
+import { useRecoilState } from "recoil";
 import { segmentsAtom, serverKeyAtom } from "../recoilStore/store";
-import axios from "axios";
 import useFetch from "../hooks/useFetch";
 
 export default function LandingPage() {
-  // console.log("segments in props", segments)
-  // const [segment, setSegment] = useRecoilState(segmentsAtom)
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [serverKey, setServerKey] = useRecoilState(serverKeyAtom);
   const [isServerKeyValid, setIsServerKeyValid] = useState(false);
   const handleInput = (event) => {
@@ -33,55 +30,69 @@ export default function LandingPage() {
     method: "POST",
     body: JSON.stringify({ serverKey: serverKey }),
   };
+
+  const getServerKey = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  };
   const useDataFetcher = (initialState, url, options) => {
     const [data, setData] = useState(initialState);
     const [segments, setSegments] = useRecoilState(segmentsAtom);
     const fetch = useFetch();
-  
+
     const fetchData = async () => {
       setData("loading...");
       const result = await (await fetch(url, options)).json();
-      console.log(result)
+      console.log(result);
+      if('serverKey' in result){
+        setData(result.serverKey)
+      }
     };
-  
-    return [data, fetchData, segments];
+
+    return [data, fetchData];
   };
 
-    const [serverKeyPost, fetchServerKeyPost] = useDataFetcher(
-      "",
-      "/api/updateServerKey",
-      postOptions
-    );
+  const [serverKeyPost, fetchServerKeyPost] = useDataFetcher(
+    "",
+    "/api/updateServerKey",
+    postOptions
+  );
+  const [responseServerKey, fetchServerKey] = useDataFetcher(
+    "",
+    "/api/getServerKey",
+    getServerKey
+  );
   const handleSubmit = () => {
     if (serverKey.length < 152) {
       alert("Invalid Server Key");
     } else {
-        // setSegment(segments)
-        // console.log(segment)
-  // axios.post('https://0c12-106-51-37-219.ngrok-free.app/api/updateServerKey',serverKey)
-  // .then((response)=>{
-  //   console.log("Request success")
-  //   console.log(response.data)
-  // })
-  // .catch((error)=>{
-  //   console.log("request denied")
-  //   console.log(error)
-  // })
-  fetchServerKeyPost()
-  navigate('/createnotification')
-     }
+      fetchServerKeyPost();
+      navigate("/createnotification");
+    }
   };
-  
+
+  useEffect(() => {
+    fetchServerKey();
+    setServerKey(responseServerKey);
+  }, []);
+  useEffect(()=>{
+    console.log("useEffect running on response")
+    console.log(responseServerKey)  
+    if(responseServerKey.length===152){
+      console.log("if condition running", responseServerKey)
+      navigate("/createnotification")
+    }
+  },[responseServerKey])
+
   return (
     <>
       <Page>
         <div className={styles.container}>
           <div className={styles.topHalf}>
-            <img
-              src="/userImg.png"
-              alt="userIcon"
-              className={styles.userImg}
-            />
+            <img src="/userImg.png" alt="userIcon" className={styles.userImg} />
             <Text id={styles.greeting} as="h1" variant="headingMd">
               Hi, Welcome!
             </Text>
@@ -90,10 +101,11 @@ export default function LandingPage() {
             <Text id={styles.heading} variant="headingMd">
               Please enter your server key
             </Text>
-      
-         <input
+
+            <input
               onChange={handleInput}
               type="text"
+              value={serverKey}
               maxLength="152"
               className={styles.serverKeyInput}
               placeholder=" Enter Sever Key"
@@ -107,7 +119,6 @@ export default function LandingPage() {
             >
               Submit
             </Button>
-    
           </div>
         </div>
       </Page>

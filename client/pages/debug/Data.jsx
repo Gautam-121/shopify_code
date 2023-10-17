@@ -2,7 +2,6 @@ import { Layout, LegacyCard, Page } from "@shopify/polaris";
 import { navigate } from "raviger";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import Notification from "../Notification";
 import LandingPage from "../LandingPage";
 import {useRecoilState} from 'recoil'
 import { segmentsAtom } from "../../recoilStore/store";

@@ -10,7 +10,7 @@ const getAllSegment = async (req, res) => {
   try {
     const shop = req.query.shop;
     console.log("console from segment",req.query.shop)
-    const sessionDetail = await SessionModel.findOne({ shop: shop });
+    const sessionDetail = await SessionModel.findOne({ where: { shop: shop } });
     if (sessionDetail === null) {
       return undefined;
     }

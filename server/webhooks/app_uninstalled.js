@@ -14,8 +14,19 @@ const appUninstallHandler = async (
 ) => {
   /** @type {webhookTopic} */
   const webhookBody = JSON.parse(webhookRequestBody);
-  await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
-  await SessionModel.deleteMany({ shop });
+  try {
+    // Use Sequelize to update the store model
+    await StoreModel.update({ isActive: false }, { where: { shop } });
+
+    // Use Sequelize to delete sessions
+    await SessionModel.destroy({ where: { shop } });
+  } catch (error) {
+    // Handle errors appropriately
+    console.error('Error in appUninstallHandler:', error);
+    throw error;
+  }
+  // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
+  // await SessionModel.deleteMany({ shop });
 };
 
 export default appUninstallHandler;
